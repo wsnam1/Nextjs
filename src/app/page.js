@@ -144,15 +144,42 @@ export default function Home() {
                                 bg="black"
                                 color="white"
                                 _hover={{ bg: 'gray.800' }}
+                                position="relative"
+                                pr="2.5rem"
+                                sx={{
+                                    '&::after': {
+                                        content: '"→"',
+                                        position: 'absolute',
+                                        right: '1rem',
+                                        transition: 'transform 0.2s',
+                                    },
+                                    '&:hover::after': {
+                                        transform: 'translateX(4px)',
+                                    },
+                                }}
                             >
                                 Start now
                             </Button>
+
                             <Button
                                 size="lg"
                                 variant="outline"
                                 color="black"
                                 borderColor="black"
                                 _hover={{ bg: 'gray.100' }}
+                                position="relative"
+                                pr="2.5rem"
+                                sx={{
+                                    '&::after': {
+                                        content: '"→"',
+                                        position: 'absolute',
+                                        right: '1rem',
+                                        transition: 'transform 0.2s',
+                                    },
+                                    '&:hover::after': {
+                                        transform: 'translateX(4px)',
+                                    },
+                                }}
                             >
                                 Contact sales
                             </Button>
@@ -169,6 +196,11 @@ export default function Home() {
                     </Box>
                 </Flex>
             </Box>
+
+
+
         </ChakraProvider>
+
+
     );
 }
