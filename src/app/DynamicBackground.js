@@ -26,24 +26,21 @@ const DynamicBackground = () => {
             uniform float u_time;
             uniform vec2 u_resolution;
 
-            // Function to create pastel colors
             vec3 pastel(vec3 color, float factor) {
                 return mix(color, vec3(1.0), factor);
             }
 
             void main() {
                 vec2 st = gl_FragCoord.xy / u_resolution;
-                float t = u_time * 0.9; // Slowed down the animation even more
+                float t = u_time * 0.1;
 
-                // Pastel colors
-                vec3 color1 = pastel(vec3(0.0, 0.8, 0.4), 0.6);  // Soft green
-                vec3 color2 = pastel(vec3(0.0, 0.5, 1.0), 0.6);  // Soft blue
-                vec3 color3 = pastel(vec3(0.8, 0.3, 0.5), 0.6);  // Soft pink
-                vec3 color4 = pastel(vec3(1.0, 0.7, 0.0), 0.7);  // Soft yellow
-                vec3 color5 = pastel(vec3(0.5, 0.0, 0.5), 0.6);  // Soft purple
-                vec3 color6 = pastel(vec3(0.0, 0.8, 0.8), 0.6);  // Soft cyan
+                vec3 color1 = pastel(vec3(0.0, 0.8, 0.4), 0.6);
+                vec3 color2 = pastel(vec3(0.0, 0.5, 1.0), 0.6);
+                vec3 color3 = pastel(vec3(0.8, 0.3, 0.5), 0.6);
+                vec3 color4 = pastel(vec3(1.0, 0.7, 0.0), 0.7);
+                vec3 color5 = pastel(vec3(0.5, 0.0, 0.5), 0.6);
+                vec3 color6 = pastel(vec3(0.0, 0.8, 0.8), 0.6);
 
-                // Create a smooth transition between colors
                 vec3 color = mix(
                     mix(
                         mix(color1, color2, sin(st.x * 3.14159 + t) * 0.5 + 0.5),
@@ -58,7 +55,6 @@ const DynamicBackground = () => {
             }
         `;
 
-        // Compile shader
         const compileShader = (gl, type, source) => {
             const shader = gl.createShader(type);
             gl.shaderSource(shader, source);
@@ -71,7 +67,6 @@ const DynamicBackground = () => {
             return shader;
         };
 
-        // Create program
         const createProgram = (gl, vertexShader, fragmentShader) => {
             const program = gl.createProgram();
             gl.attachShader(program, vertexShader);
@@ -140,7 +135,21 @@ const DynamicBackground = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10" />;
+    return (
+        <canvas
+            ref={canvasRef}
+            className="fixed top-0 left-0 w-full h-full -z-10"
+            style={{
+                position: 'absolute', // Fix the position
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: -10, // Ensure it stays behind other content
+                clipPath: 'polygon(0 0, 100% 0, 100% 30%, 0 70%)' // Adjust this to change the tilt
+            }}
+        />
+    );
 };
 
 export default DynamicBackground;

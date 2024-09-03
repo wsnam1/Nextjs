@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from 'react';
 import {
     ChakraProvider,
@@ -28,65 +27,148 @@ export default function Home() {
     return (
         <ChakraProvider>
             <DynamicBackground />
-                <Box minHeight="100vh">
-                    <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding="6" bg="rgba(255, 255, 255, 0.1)" backdropFilter="blur(10px)">
-                        <Flex align="center" mr={5}>
-                            <Heading as="h1" size="lg" letterSpacing={'tighter'} color="white">
-                                ButterBoard
-                            </Heading>
-                        </Flex>
-
-                        <HStack spacing={8} display={{ base: 'none', md: 'flex' }}>
-                            <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>Calendar</Button>
-                            <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>JamBoard</Button>
-                            <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>Meetings</Button>
-                            <Button bg="white" color="black" _hover={{ bg: 'gray.200' }}>Sign up</Button>
-                        </HStack>
-
-                        <Box display={{ base: 'block', md: 'none' }}>
-                            <Button onClick={onOpen} bg="transparent" _hover={{ bg: 'whiteAlpha.200' }}>
-                                <HamburgerIcon color="white" />
-                            </Button>
-                        </Box>
+            <Box minHeight="100vh">
+                <Flex
+                    as="nav"
+                    align="center"
+                    justify="space-between"
+                    wrap="wrap"
+                    padding="6"
+                    bg="rgba(255, 255, 255, 0.1)"
+                    backdropFilter="blur(10px)"
+                    position="fixed" // Fixed position
+                    top={0}
+                    left={0}
+                    right={0}
+                    zIndex={10} // Ensure it stays on top
+                    pl={{ base: '5%', md: '20%' }}
+                    pr={{ base: '5%', md: '20%' }}
+                >
+                    <Flex align="center" mr={5}>
+                        <Heading as="h1" size="lg" letterSpacing={'tighter'} color="white">
+                            ButterBoard
+                        </Heading>
                     </Flex>
 
-                    <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-                        <DrawerOverlay />
-                        <DrawerContent>
-                            <DrawerCloseButton />
-                            <DrawerHeader>Menu</DrawerHeader>
-                            <DrawerBody>
-                                <VStack spacing={4}>
-                                    <Button w="full" variant="ghost">Calendar</Button>
-                                    <Button w="full" variant="ghost">JamBoard</Button>
-                                    <Button w="full" variant="ghost">Meetings</Button>
-                                    <Button w="full" colorScheme="blue">Sign up</Button>
-                                </VStack>
-                            </DrawerBody>
-                        </DrawerContent>
-                    </Drawer>
+                    <HStack spacing={8} display={{ base: 'none', md: 'flex' }}>
+                        <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>Calendar</Button>
+                        <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>JamBoard</Button>
+                        <Button variant="ghost" color="white" _hover={{ bg: 'whiteAlpha.200' }}>Meetings</Button>
+                        <Button bg="white" color="black" _hover={{ bg: 'gray.200' }}>Sign up</Button>
+                    </HStack>
 
-                    <Flex direction={{ base: 'column', md: 'row' }} align="center" justify="center" flex={2} px={20} py={20}>
-                        <VStack spacing={6} align={{ base: 'center', md: 'flex-start' }} maxW="xlg" mr={{ base: 0, md: 10 }} mb={{ base: 10, md: 0 }}>
-                            <Heading as="h2" size="3xl" color="white" textAlign={{ base: 'center', md: 'left' }}>
-                                All productivity tools
-                            </Heading>
-                            <Heading as="h3" size="2xl" color="white" textAlign={{ base: 'center', md: 'left' }}>
-                                All in one place
-                            </Heading>
-                            <Text color="white" fontSize="xl" textAlign={{ base: 'center', md: 'left' }}>
-                                Elevate your efficiency with our comprehensive productivity suite.
-                            </Text>
-                            <Button size="lg" bg="black" color="white" _hover={{ bg: 'gray.800' }}>
+                    <Box display={{ base: 'block', md: 'none' }}>
+                        <Button onClick={onOpen} bg="transparent" _hover={{ bg: 'whiteAlpha.200' }}>
+                            <HamburgerIcon color="white" />
+                        </Button>
+                    </Box>
+                </Flex>
+
+                <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <DrawerHeader>Menu</DrawerHeader>
+                        <DrawerBody>
+                            <VStack spacing={4}>
+                                <Button w="full" variant="ghost">Calendar</Button>
+                                <Button w="full" variant="ghost">JamBoard</Button>
+                                <Button w="full" variant="ghost">Meetings</Button>
+                                <Button w="full" colorScheme="blue">Sign up</Button>
+                            </VStack>
+                        </DrawerBody>
+                    </DrawerContent>
+                </Drawer>
+
+                <Flex
+                    direction={{ base: "column", md: "row" }}
+                    align={{ base: "flex-start", md: "center" }}
+                    justify="space-between"
+                    position="absolute"
+
+
+                    px={{ base: 5, md: 20 }}
+                    py={20}
+                    mt="80px" // Add margin top to prevent content from being hidden
+                    pl={{ base: '5%', md: '20%' }}
+                    pr={{ base: '5%', md: '20%' }}
+                >
+                    <VStack
+                        spacing={6}
+                        align="flex-start"
+                        maxW={{ base: "100%", md: "50%" }}
+                        mb={{ base: 10, md: 0 }}
+                        textAlign="left"
+                    >
+                        <Heading
+                            as="h2"
+                            size="4xl"
+                            color="black"
+                            fontWeight="bold"
+                        >
+                            Streamline
+                        </Heading>
+                        <Heading
+                            as="h2"
+                            size="4xl"
+                            color="black"
+                            fontWeight="bold"
+                        >
+                            Your Tools
+                        </Heading>
+                        <Heading
+                            as="h2"
+                            size="4xl"
+                            color="black"
+                            fontWeight="bold"
+                        >
+                            To Maximize
+                        </Heading>
+                        <Heading
+                            as="h2"
+                            size="4xl"
+                            color="black"
+                            fontWeight="bold"
+                        >
+                            Efficiency
+                        </Heading>
+                        <Text
+                            color="black"
+                            fontSize="2xl"
+                        >
+                            Elevate your efficiency with our comprehensive productivity suite.
+                        </Text>
+                        <HStack spacing={4}>
+                            <Button
+                                size="lg"
+                                bg="black"
+                                color="white"
+                                _hover={{ bg: 'gray.800' }}
+                            >
                                 Start now
                             </Button>
-                        </VStack>
-                        <Box bg="white" borderRadius="lg" boxShadow="xl" p={6}>
-                            <Image src="/calendar.png" alt="Calendar" maxW="400px" />
-                        </Box>
-                    </Flex>
-                </Box>
-
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                color="black"
+                                borderColor="black"
+                                _hover={{ bg: 'gray.100' }}
+                            >
+                                Contact sales
+                            </Button>
+                        </HStack>
+                    </VStack>
+                    <Box
+                        display={{ base: "none", md: "block" }}
+                        bg="white"
+                        borderRadius="lg"
+                        boxShadow="xl"
+                        p={6}
+                    >
+                        <Image src="/stripe.png" alt="Calendar" maxW="400px" />
+                    </Box>
+                </Flex>
+            </Box>
         </ChakraProvider>
     );
 }
